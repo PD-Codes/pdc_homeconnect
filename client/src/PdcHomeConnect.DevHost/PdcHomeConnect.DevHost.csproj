@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!--
+    Cross-platform development host with simulated entities.
+    Lets you develop and test the Home Assistant integration without a Windows PC.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>PdcHomeConnect.DevHost</RootNamespace>
+    <AssemblyName>PdcHomeConnect.DevHost</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PdcHomeConnect.Core\PdcHomeConnect.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,82 @@
+// PDC HomeConnect - tray app settings (per Windows user)
+// Changes are applied automatically after saving (the tray app restarts itself).
+// Docs: https://github.com/PD-Codes/pdc_homeconnect/blob/main/docs/CONFIGURATION.md
+{
+  // Minutes without keyboard/mouse input until "AFK" turns on.
+  "afk_minutes": 5,
+
+  // Send window titles of the foreground app (privacy: off by default).
+  "report_window_titles": false,
+
+  // Apps exposed as "running" binary sensors. "processes" = executable names.
+  "watched_apps": [
+    { "id": "discord", "name": "Discord", "processes": ["Discord.exe", "DiscordPTB.exe", "DiscordCanary.exe"] },
+    { "id": "steam", "name": "Steam", "processes": ["steam.exe"] },
+    { "id": "spotify", "name": "Spotify", "processes": ["Spotify.exe"] },
+    { "id": "obs", "name": "OBS Studio", "processes": ["obs64.exe"] },
+    { "id": "vscode", "name": "Visual Studio Code", "processes": ["Code.exe"] },
+    { "id": "claude", "name": "Claude", "processes": ["claude.exe"] },
+    { "id": "teams", "name": "Microsoft Teams", "processes": ["ms-teams.exe", "Teams.exe"] },
+    { "id": "zoom", "name": "Zoom", "processes": ["Zoom.exe"] }
+  ],
+
+  // Activity "working": these apps in the foreground (or Claude Code working).
+  "work_apps": [
+    "Code.exe", "devenv.exe", "rider64.exe", "idea64.exe", "pycharm64.exe", "webstorm64.exe", "clion64.exe",
+    "WINWORD.EXE", "EXCEL.EXE", "POWERPNT.EXE", "OUTLOOK.EXE", "ONENOTE.EXE", "WindowsTerminal.exe",
+    "notepad++.exe", "sublime_text.exe", "claude.exe", "Cursor.exe", "Obsidian.exe", "Notion.exe"
+  ],
+
+  // Activity "call": these apps using the microphone or webcam.
+  // Store apps are listed by package name (e.g. "MSTeams").
+  "call_apps": ["Discord.exe", "DiscordPTB.exe", "DiscordCanary.exe", "MSTeams", "ms-teams.exe", "Teams.exe", "Zoom.exe", "Skype.exe", "slack.exe", "WhatsApp.exe", "5319275A.WhatsAppDesktop", "Signal.exe"],
+
+  "games": {
+    // Detection sources.
+    "steam": true,
+    "epic": true,
+    "gog": true,
+    // Treat exclusive fullscreen DirectX apps as games.
+    "fullscreen": true,
+    // Cover art from the Steam CDN as entity picture (loaded by your browser, not by the PC).
+    "steam_images": true,
+    // Your own games: { "name": "Minecraft", "processes": ["javaw.exe"] }
+    "custom": [],
+    // Processes that are never treated as games.
+    "ignore": ["steam.exe", "steamwebhelper.exe", "EpicGamesLauncher.exe", "GalaxyClient.exe", "explorer.exe", "vlc.exe", "mpc-hc64.exe", "chrome.exe", "msedge.exe", "firefox.exe"]
+  },
+
+  "discord": {
+    // Rich voice status (channel, members, mute/deafen) via Discord RPC.
+    // Requires your own Discord application: see docs/DISCORD.md. Set it up from the tray menu.
+    "client_id": "",
+    "redirect_uri": "http://127.0.0.1"
+  },
+
+  "notifications": {
+    // When Windows hides notifications (fullscreen app/game): "none", "sound" or "speak".
+    "fullscreen_fallback": "sound"
+  },
+
+  // Global hotkeys -> event entity "Hotkey" in Home Assistant. Example: { "id": "toggle_light", "keys": "Ctrl+Alt+L" }
+  "hotkeys": [],
+
+  // Entries in the tray menu -> event entity "Tray action". Example: { "id": "movie_mode", "name": "Movie mode" }
+  "tray_actions": [],
+
+  // Commands Home Assistant may run as you (buttons + pdc_homeconnect.run_command).
+  // window: "hidden", "normal", "minimized" or "maximized".
+  // Example: { "id": "open_downloads", "name": "Open Downloads", "command": "explorer.exe", "args": "%USERPROFILE%\\Downloads", "window": "normal" }
+  "commands": [],
+
+  // URL schemes allowed for pdc_homeconnect.open_url.
+  "allowed_url_schemes": ["http", "https", "steam", "discord", "spotify", "ms-settings", "mailto", "obsidian", "vscode"],
+
+  "features": {
+    "media": true,
+    "audio_devices": true,
+    "brightness": true,
+    "dark_mode": true,
+    "claude_code": true
+  }
+}

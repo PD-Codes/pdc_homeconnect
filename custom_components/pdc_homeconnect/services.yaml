@@ -1,0 +1,229 @@
+notify:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: pdc_homeconnect
+          multiple: true
+    message:
+      required: true
+      example: "Someone is at the door"
+      selector:
+        text:
+          multiline: true
+    title:
+      example: "Doorbell"
+      selector:
+        text:
+    image:
+      example: "camera.front_door"
+      selector:
+        text:
+    actions:
+      example: '[{"action": "open_door", "title": "Open"}, {"action": "ignore", "title": "Ignore"}]'
+      selector:
+        object:
+    reply:
+      example: "Type a reply"
+      selector:
+        text:
+    scenario:
+      default: default
+      selector:
+        select:
+          translation_key: scenario
+          options:
+            - default
+            - reminder
+            - alarm
+            - urgent
+    sound:
+      default: default
+      selector:
+        select:
+          translation_key: sound
+          options:
+            - default
+            - silent
+            - im
+            - mail
+            - reminder
+            - sms
+            - alarm
+            - call
+    duration:
+      default: short
+      selector:
+        select:
+          translation_key: duration
+          options:
+            - short
+            - long
+    tag:
+      example: "doorbell"
+      selector:
+        text:
+    fullscreen_fallback:
+      default: auto
+      selector:
+        select:
+          translation_key: fullscreen_fallback
+          options:
+            - auto
+            - sound
+            - speak
+
+clear_notifications:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: pdc_homeconnect
+          multiple: true
+    tag:
+      selector:
+        text:
+
+open_url:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: pdc_homeconnect
+          multiple: true
+    url:
+      required: true
+      example: "https://www.home-assistant.io"
+      selector:
+        text:
+
+speak:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: pdc_homeconnect
+          multiple: true
+    message:
+      required: true
+      example: "Dinner is ready"
+      selector:
+        text:
+    language:
+      example: "de-DE"
+      selector:
+        text:
+
+set_clipboard:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: pdc_homeconnect
+          multiple: true
+    text:
+      required: true
+      selector:
+        text:
+          multiline: true
+
+power:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: pdc_homeconnect
+          multiple: true
+    action:
+      required: true
+      selector:
+        select:
+          translation_key: power_action
+          options:
+            - shutdown
+            - restart
+            - sleep
+            - hibernate
+            - logoff
+            - abort
+    delay:
+      default: 0
+      selector:
+        number:
+          min: 0
+          max: 86400
+          unit_of_measurement: s
+          mode: box
+    force:
+      default: false
+      selector:
+        boolean:
+
+run_command:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: pdc_homeconnect
+          multiple: true
+    command:
+      required: true
+      example: "flush_dns"
+      selector:
+        text:
+
+vm_control:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: pdc_homeconnect
+          multiple: true
+    vm:
+      required: true
+      selector:
+        text:
+    action:
+      required: true
+      selector:
+        select:
+          translation_key: vm_action
+          options:
+            - start
+            - shutdown
+            - turn_off
+            - save
+            - pause
+            - resume
+            - reset
+
+service_control:
+  fields:
+    device_id:
+      required: true
+      selector:
+        device:
+          integration: pdc_homeconnect
+          multiple: true
+    service:
+      required: true
+      example: "Spooler"
+      selector:
+        text:
+    action:
+      required: true
+      selector:
+        select:
+          translation_key: service_action
+          options:
+            - start
+            - stop
+            - restart

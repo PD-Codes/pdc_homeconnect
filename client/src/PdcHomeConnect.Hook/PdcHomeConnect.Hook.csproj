@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Claude Code hook helper (pdc-hc-hook.exe): reads the hook JSON from stdin and forwards it
+    to the tray app of the same Windows session. Windows subsystem: never opens a console window.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>pdc-hc-hook</AssemblyName>
+    <RootNamespace>PdcHomeConnect.Hook</RootNamespace>
+    <ApplicationIcon>..\..\installer\assets\app.ico</ApplicationIcon>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <UseSystemResourceKeys>true</UseSystemResourceKeys>
+    <TieredPGO>true</TieredPGO>
+    <IsPackable>false</IsPackable>
+    <AssemblyTitle>PDC HomeConnect Claude Code hook</AssemblyTitle>
+  </PropertyGroup>
+
+</Project>

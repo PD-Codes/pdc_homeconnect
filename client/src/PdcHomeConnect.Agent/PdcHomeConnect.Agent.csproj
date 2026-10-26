@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Tray agent: runs in every user session (autostart), collects user level data
+    (apps, games, Discord, media, notifications, hotkeys, Claude Code) and forwards it to the service.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>PdcHomeConnect.Agent</RootNamespace>
+    <AssemblyName>PdcHomeConnect.Agent</AssemblyName>
+    <ApplicationIcon>..\..\installer\assets\app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>$(NoWarn);SYSLIB1054;SYSLIB1096;CS8981</NoWarn>
+    <IsPackable>false</IsPackable>
+    <AssemblyTitle>PDC HomeConnect</AssemblyTitle>
+    <Description>PDC HomeConnect</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" />
+    <PackageReference Include="Serilog.Extensions.Logging" />
+    <PackageReference Include="Serilog.Sinks.File" />
+    <PackageReference Include="System.Management" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.Extensions.Logging" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PdcHomeConnect.Core\PdcHomeConnect.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="agent.default.jsonc" LogicalName="agent.default.jsonc" />
+    <EmbeddedResource Include="..\..\installer\assets\tray-connected.ico" LogicalName="tray-connected.ico" />
+    <EmbeddedResource Include="..\..\installer\assets\tray-disconnected.ico" LogicalName="tray-disconnected.ico" />
+    <EmbeddedResource Include="..\..\installer\assets\tray-pairing.ico" LogicalName="tray-pairing.ico" />
+    <EmbeddedResource Include="..\..\installer\assets\app.ico" LogicalName="app.ico" />
+  </ItemGroup>
+
+</Project>

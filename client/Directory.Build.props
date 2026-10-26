@@ -1,0 +1,22 @@
+<Project>
+  <!-- Shared build settings for all PDC HomeConnect client projects. -->
+  <PropertyGroup>
+    <!-- Single source of truth for the client version (keep in sync with manifest.json). -->
+    <Version>0.1.0</Version>
+    <Company>PD-Codes</Company>
+    <Product>PDC HomeConnect</Product>
+    <Authors>PD-Codes</Authors>
+    <Copyright>Copyright (c) PD-Codes</Copyright>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Deterministic>true</Deterministic>
+    <!-- Allows building the Windows projects on Linux/macOS (CI, containers). -->
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <!-- Same versions of shared (transitive) packages in all apps: they are published into one folder. -->
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <NoWarn>$(NoWarn);CA1416;WFO5001</NoWarn>
+  </PropertyGroup>
+</Project>

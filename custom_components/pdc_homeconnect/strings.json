@@ -1,0 +1,797 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "Connect a PC",
+        "description": "Enter the address of the PC that runs the PDC HomeConnect client.",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        },
+        "data_description": {
+          "host": "IP address or host name of the PC.",
+          "port": "Port of the PDC HomeConnect client (default 48733)."
+        }
+      },
+      "zeroconf_confirm": {
+        "title": "PDC HomeConnect",
+        "description": "Do you want to connect **{name}**?"
+      },
+      "pair": {
+        "title": "Pair with {name}",
+        "description": "A 6-digit pairing code is now shown on **{name}** (Windows notification and tray icon). Enter it below. The code is valid for 5 minutes.",
+        "data": {
+          "code": "Pairing code"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-pair {name}",
+        "description": "**{name}** no longer accepts the stored credentials (for example after a reinstall or when the pairing was removed). Continue to request a new pairing code."
+      },
+      "reconfigure": {
+        "title": "Change connection",
+        "description": "Change the address of **{name}**.",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect. Check the address, that the client is running and that the firewall allows the connection.",
+      "invalid_code": "The code is not correct.",
+      "no_active_code": "The pairing code expired. A new code is now shown on the PC.",
+      "too_many_attempts": "Too many wrong codes. A new code is now shown on the PC.",
+      "wrong_device": "This address belongs to a different PC.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This PC is already configured.",
+      "reauth_successful": "Re-pairing was successful.",
+      "reconfigure_successful": "The connection was updated.",
+      "cannot_connect": "Could not connect to the PC.",
+      "unsupported_protocol": "The client version is not compatible with this integration. Update both to the latest version."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "cpu_load": {
+        "name": "CPU load"
+      },
+      "cpu_temperature": {
+        "name": "CPU temperature"
+      },
+      "cpu_power": {
+        "name": "CPU power"
+      },
+      "cpu_clock": {
+        "name": "CPU clock"
+      },
+      "memory_usage": {
+        "name": "Memory usage"
+      },
+      "memory_used": {
+        "name": "Memory used"
+      },
+      "disk_usage": {
+        "name": "Disk {disk} usage"
+      },
+      "network_download": {
+        "name": "Network download"
+      },
+      "network_upload": {
+        "name": "Network upload"
+      },
+      "last_boot": {
+        "name": "Last boot"
+      },
+      "battery": {
+        "name": "Battery"
+      },
+      "gpu_load": {
+        "name": "GPU load"
+      },
+      "gpu_temperature": {
+        "name": "GPU temperature"
+      },
+      "gpu_hotspot_temperature": {
+        "name": "GPU hotspot temperature"
+      },
+      "gpu_memory_usage": {
+        "name": "GPU memory usage"
+      },
+      "gpu_memory_used": {
+        "name": "GPU memory used"
+      },
+      "gpu_power": {
+        "name": "GPU power"
+      },
+      "gpu_fan": {
+        "name": "GPU fan"
+      },
+      "gpu_clock": {
+        "name": "GPU clock"
+      },
+      "gpu_n_load": {
+        "name": "GPU {index} load"
+      },
+      "gpu_n_temperature": {
+        "name": "GPU {index} temperature"
+      },
+      "gpu_n_hotspot_temperature": {
+        "name": "GPU {index} hotspot temperature"
+      },
+      "gpu_n_memory_usage": {
+        "name": "GPU {index} memory usage"
+      },
+      "gpu_n_memory_used": {
+        "name": "GPU {index} memory used"
+      },
+      "gpu_n_power": {
+        "name": "GPU {index} power"
+      },
+      "gpu_n_fan": {
+        "name": "GPU {index} fan"
+      },
+      "gpu_n_clock": {
+        "name": "GPU {index} clock"
+      },
+      "fan": {
+        "name": "Fan {name}"
+      },
+      "drive_temperature": {
+        "name": "{drive} temperature"
+      },
+      "drive_health": {
+        "name": "{drive} health",
+        "state": {
+          "healthy": "Healthy",
+          "warning": "Warning",
+          "unhealthy": "Unhealthy",
+          "unknown": "Unknown"
+        }
+      },
+      "drive_life_remaining": {
+        "name": "{drive} life remaining"
+      },
+      "session_state": {
+        "name": "Session",
+        "state": {
+          "active": "Active",
+          "locked": "Locked",
+          "disconnected": "Disconnected",
+          "logged_off": "Logged off"
+        }
+      },
+      "windows_updates": {
+        "name": "Windows updates"
+      },
+      "defender_status": {
+        "name": "Defender",
+        "state": {
+          "ok": "OK",
+          "warning": "Warning",
+          "outdated": "Signatures outdated",
+          "disabled": "Disabled",
+          "action_required": "Action required",
+          "passive": "Passive (third-party antivirus)",
+          "unknown": "Unknown"
+        }
+      },
+      "user_sessions": {
+        "name": "User sessions"
+      },
+      "event_log_errors": {
+        "name": "Event log errors (24 h)"
+      },
+      "failed_tasks": {
+        "name": "Failed scheduled tasks"
+      },
+      "last_backup": {
+        "name": "Last backup"
+      },
+      "storage_pool_health": {
+        "name": "Storage pool {pool}",
+        "state": {
+          "healthy": "Healthy",
+          "warning": "Warning",
+          "unhealthy": "Unhealthy",
+          "unknown": "Unknown"
+        }
+      },
+      "virtual_disk_health": {
+        "name": "Virtual disk {disk}",
+        "state": {
+          "healthy": "Healthy",
+          "warning": "Warning",
+          "unhealthy": "Unhealthy",
+          "unknown": "Unknown"
+        }
+      },
+      "vm_state": {
+        "name": "VM {vm} state",
+        "state": {
+          "running": "Running",
+          "off": "Off",
+          "saved": "Saved",
+          "paused": "Paused",
+          "starting": "Starting",
+          "stopping": "Stopping",
+          "saving": "Saving",
+          "pausing": "Pausing",
+          "resuming": "Resuming",
+          "other": "Other"
+        }
+      },
+      "vm_cpu": {
+        "name": "VM {vm} CPU"
+      },
+      "vm_memory": {
+        "name": "VM {vm} memory"
+      },
+      "smb_sessions": {
+        "name": "SMB sessions"
+      },
+      "smb_open_files": {
+        "name": "SMB open files"
+      },
+      "plex_streams": {
+        "name": "Plex streams"
+      },
+      "plex_transcodes": {
+        "name": "Plex transcodes"
+      },
+      "plex_bandwidth": {
+        "name": "Plex bandwidth"
+      },
+      "plex_library": {
+        "name": "Plex {library}"
+      },
+      "foreground_app": {
+        "name": "Foreground app"
+      },
+      "open_apps": {
+        "name": "Open apps"
+      },
+      "idle_time": {
+        "name": "Idle time"
+      },
+      "fullscreen_state": {
+        "name": "Fullscreen",
+        "state": {
+          "none": "None",
+          "fullscreen": "Fullscreen app",
+          "game": "Game (exclusive)",
+          "presentation": "Presentation",
+          "quiet_time": "Quiet time",
+          "app": "Store app",
+          "away": "Away"
+        }
+      },
+      "activity": {
+        "name": "Activity",
+        "state": {
+          "locked": "Locked",
+          "gaming": "Gaming",
+          "call": "In a call",
+          "afk": "Away (AFK)",
+          "working": "Working",
+          "media": "Media",
+          "active": "Active",
+          "logged_off": "Logged off",
+          "unknown": "Unknown"
+        }
+      },
+      "current_game": {
+        "name": "Current game"
+      },
+      "steam_status": {
+        "name": "Steam",
+        "state": {
+          "offline": "Offline",
+          "online": "Online",
+          "in_game": "In game"
+        }
+      },
+      "discord_voice_channel": {
+        "name": "Discord voice channel"
+      },
+      "claude_code": {
+        "name": "Claude Code",
+        "state": {
+          "idle": "Idle",
+          "working": "Working",
+          "waiting": "Waiting for input",
+          "error": "Error"
+        }
+      }
+    },
+    "binary_sensor": {
+      "online": {
+        "name": "Online"
+      },
+      "pending_reboot": {
+        "name": "Restart pending"
+      },
+      "battery_charging": {
+        "name": "Charging"
+      },
+      "power_plugged": {
+        "name": "Power plugged in"
+      },
+      "afk": {
+        "name": "AFK"
+      },
+      "monitor_power": {
+        "name": "Displays"
+      },
+      "webcam_in_use": {
+        "name": "Webcam in use"
+      },
+      "microphone_in_use": {
+        "name": "Microphone in use"
+      },
+      "gaming": {
+        "name": "Gaming"
+      },
+      "steam_updating": {
+        "name": "Steam downloading"
+      },
+      "discord_voice": {
+        "name": "Discord voice"
+      },
+      "discord_speaking": {
+        "name": "Speaking in Discord"
+      },
+      "app_running": {
+        "name": "{app}"
+      },
+      "plex_online": {
+        "name": "Plex Media Server"
+      },
+      "plex_scanning": {
+        "name": "Plex library scan"
+      }
+    },
+    "switch": {
+      "windows_service": {
+        "name": "Service {service}"
+      },
+      "vm": {
+        "name": "VM {vm}"
+      },
+      "iis_site": {
+        "name": "IIS {site}"
+      },
+      "docker_container": {
+        "name": "Container {container}"
+      },
+      "discord_mute": {
+        "name": "Discord mute"
+      },
+      "discord_deafen": {
+        "name": "Discord deafen"
+      },
+      "dark_mode": {
+        "name": "Dark mode"
+      },
+      "privacy_mode": {
+        "name": "Privacy mode"
+      }
+    },
+    "button": {
+      "shutdown": {
+        "name": "Shut down"
+      },
+      "restart": {
+        "name": "Restart"
+      },
+      "sleep": {
+        "name": "Sleep"
+      },
+      "hibernate": {
+        "name": "Hibernate"
+      },
+      "logoff": {
+        "name": "Sign out"
+      },
+      "restart_firmware": {
+        "name": "Restart to UEFI"
+      },
+      "lock": {
+        "name": "Lock"
+      },
+      "monitor_off": {
+        "name": "Turn off displays"
+      },
+      "monitor_wake": {
+        "name": "Wake displays"
+      },
+      "discord_leave": {
+        "name": "Leave Discord voice"
+      },
+      "wake_on_lan": {
+        "name": "Wake on LAN"
+      },
+      "command": {
+        "name": "{command}"
+      },
+      "plex_scan": {
+        "name": "Scan Plex libraries"
+      }
+    },
+    "number": {
+      "monitor_brightness": {
+        "name": "Display {monitor} brightness"
+      }
+    },
+    "select": {
+      "audio_output": {
+        "name": "Audio output"
+      },
+      "audio_input": {
+        "name": "Audio input"
+      },
+      "power_plan": {
+        "name": "Power plan"
+      }
+    },
+    "media_player": {
+      "media": {
+        "name": "Media"
+      }
+    },
+    "event": {
+      "notification_action": {
+        "name": "Notification action",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "action": "Button pressed",
+              "reply": "Reply",
+              "dismissed": "Dismissed"
+            }
+          }
+        }
+      },
+      "hotkey": {
+        "name": "Hotkey"
+      },
+      "tray_action": {
+        "name": "Tray action"
+      },
+      "game": {
+        "name": "Game",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "started": "Started",
+              "stopped": "Stopped"
+            }
+          }
+        }
+      },
+      "claude_code_event": {
+        "name": "Claude Code event",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "prompt_submitted": "Prompt submitted",
+              "waiting_for_input": "Waiting for input",
+              "finished": "Finished",
+              "failed": "Failed",
+              "session_started": "Session started",
+              "session_ended": "Session ended"
+            }
+          }
+        }
+      },
+      "system_event": {
+        "name": "System event",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "critical": "Critical",
+              "error": "Error"
+            }
+          }
+        }
+      },
+      "plex_playback": {
+        "name": "Plex playback",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "started": "Started",
+              "stopped": "Stopped",
+              "paused": "Paused",
+              "resumed": "Resumed"
+            }
+          }
+        }
+      }
+    },
+    "update": {
+      "client": {
+        "name": "Client"
+      }
+    },
+    "notify": {
+      "notify": {
+        "name": "Notification"
+      }
+    }
+  },
+  "services": {
+    "notify": {
+      "name": "Send notification",
+      "description": "Shows a Windows notification on the PC.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "The PC(s) to send this action to."
+        },
+        "message": {
+          "name": "Message",
+          "description": "Text of the notification."
+        },
+        "title": {
+          "name": "Title",
+          "description": "Title of the notification."
+        },
+        "image": {
+          "name": "Image",
+          "description": "Camera entity (camera.xyz), image URL or /local/... path."
+        },
+        "actions": {
+          "name": "Buttons",
+          "description": "Up to 5 buttons: a list of {action, title}. A click fires the notification action event."
+        },
+        "reply": {
+          "name": "Reply field",
+          "description": "Placeholder text for a reply text box. The reply fires the notification action event."
+        },
+        "scenario": {
+          "name": "Scenario",
+          "description": "Reminder and alarm stay on screen until dismissed."
+        },
+        "sound": {
+          "name": "Sound",
+          "description": "Notification sound."
+        },
+        "duration": {
+          "name": "Duration",
+          "description": "How long the notification stays on screen."
+        },
+        "tag": {
+          "name": "Tag",
+          "description": "Identifier to replace or clear this notification later."
+        },
+        "fullscreen_fallback": {
+          "name": "Fullscreen fallback",
+          "description": "What to do when Windows hides notifications because a fullscreen app or game is running."
+        }
+      }
+    },
+    "clear_notifications": {
+      "name": "Clear notifications",
+      "description": "Removes notifications from the Windows notification center.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "The PC(s) to send this action to."
+        },
+        "tag": {
+          "name": "Tag",
+          "description": "Only remove the notification with this tag. Leave empty to remove all."
+        }
+      }
+    },
+    "open_url": {
+      "name": "Open URL",
+      "description": "Opens a URL with its default app (browser, Steam, Discord, ...).",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "The PC(s) to send this action to."
+        },
+        "url": {
+          "name": "URL",
+          "description": "The URL to open. Allowed schemes are configured on the PC."
+        }
+      }
+    },
+    "speak": {
+      "name": "Speak",
+      "description": "Reads a text aloud on the PC using a Windows voice.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "The PC(s) to send this action to."
+        },
+        "message": {
+          "name": "Message",
+          "description": "Text to speak."
+        },
+        "language": {
+          "name": "Language",
+          "description": "Voice language, e.g. de-DE or en-US."
+        }
+      }
+    },
+    "set_clipboard": {
+      "name": "Set clipboard",
+      "description": "Copies text to the clipboard of the PC.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "The PC(s) to send this action to."
+        },
+        "text": {
+          "name": "Text",
+          "description": "Text to copy."
+        }
+      }
+    },
+    "power": {
+      "name": "Power action",
+      "description": "Shuts down, restarts or suspends the PC, optionally with a delay.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "The PC(s) to send this action to."
+        },
+        "action": {
+          "name": "Action",
+          "description": "What to do."
+        },
+        "delay": {
+          "name": "Delay",
+          "description": "Seconds to wait (the user sees a warning)."
+        },
+        "force": {
+          "name": "Force",
+          "description": "Close apps without asking (unsaved work is lost)."
+        }
+      }
+    },
+    "run_command": {
+      "name": "Run command",
+      "description": "Runs a command that is defined in the client configuration on the PC.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "The PC(s) to send this action to."
+        },
+        "command": {
+          "name": "Command",
+          "description": "Id of the command from the PC configuration."
+        }
+      }
+    },
+    "vm_control": {
+      "name": "Control virtual machine",
+      "description": "Starts, stops, saves or pauses a Hyper-V virtual machine.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "The PC(s) to send this action to."
+        },
+        "vm": {
+          "name": "Virtual machine",
+          "description": "Name of the virtual machine."
+        },
+        "action": {
+          "name": "Action",
+          "description": "What to do."
+        }
+      }
+    },
+    "service_control": {
+      "name": "Control Windows service",
+      "description": "Starts, stops or restarts a watched Windows service.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "The PC(s) to send this action to."
+        },
+        "service": {
+          "name": "Service",
+          "description": "Service name (must be in the watched services list on the PC)."
+        },
+        "action": {
+          "name": "Action",
+          "description": "What to do."
+        }
+      }
+    }
+  },
+  "selector": {
+    "scenario": {
+      "options": {
+        "default": "Default",
+        "reminder": "Reminder",
+        "alarm": "Alarm",
+        "urgent": "Urgent"
+      }
+    },
+    "sound": {
+      "options": {
+        "default": "Default",
+        "silent": "Silent",
+        "im": "Message",
+        "mail": "Mail",
+        "reminder": "Reminder",
+        "sms": "SMS",
+        "alarm": "Alarm",
+        "call": "Call"
+      }
+    },
+    "duration": {
+      "options": {
+        "short": "Short",
+        "long": "Long"
+      }
+    },
+    "fullscreen_fallback": {
+      "options": {
+        "auto": "Notification only",
+        "sound": "Play a sound",
+        "speak": "Read aloud"
+      }
+    },
+    "power_action": {
+      "options": {
+        "shutdown": "Shut down",
+        "restart": "Restart",
+        "sleep": "Sleep",
+        "hibernate": "Hibernate",
+        "logoff": "Sign out",
+        "abort": "Abort pending shutdown"
+      }
+    },
+    "vm_action": {
+      "options": {
+        "start": "Start",
+        "shutdown": "Shut down (guest)",
+        "turn_off": "Turn off (hard)",
+        "save": "Save",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset"
+      }
+    },
+    "service_action": {
+      "options": {
+        "start": "Start",
+        "stop": "Stop",
+        "restart": "Restart"
+      }
+    }
+  },
+  "exceptions": {
+    "not_connected": {
+      "message": "{name} is not connected."
+    },
+    "command_failed": {
+      "message": "The PC reported an error: {error}"
+    },
+    "no_devices": {
+      "message": "No PDC HomeConnect device selected."
+    },
+    "image_failed": {
+      "message": "Could not load the image: {error}"
+    }
+  },
+  "issues": {
+    "client_outdated": {
+      "title": "Client on {name} is outdated",
+      "description": "The PDC HomeConnect client on {name} uses protocol {client_protocol}, the integration expects {protocol}. Update the client on the PC."
+    },
+    "integration_outdated": {
+      "title": "Integration is older than the client on {name}",
+      "description": "The client on {name} uses protocol {client_protocol}, this integration only supports {protocol}. Update the integration via HACS."
+    }
+  }
+}

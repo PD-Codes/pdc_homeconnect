@@ -1,0 +1,409 @@
+{
+  "entity": {
+    "sensor": {
+      "cpu_load": {
+        "default": "mdi:cpu-64-bit"
+      },
+      "cpu_temperature": {
+        "default": "mdi:thermometer"
+      },
+      "cpu_power": {
+        "default": "mdi:flash"
+      },
+      "cpu_clock": {
+        "default": "mdi:speedometer"
+      },
+      "memory_usage": {
+        "default": "mdi:memory"
+      },
+      "memory_used": {
+        "default": "mdi:memory"
+      },
+      "disk_usage": {
+        "default": "mdi:harddisk"
+      },
+      "network_download": {
+        "default": "mdi:download-network"
+      },
+      "network_upload": {
+        "default": "mdi:upload-network"
+      },
+      "last_boot": {
+        "default": "mdi:clock-start"
+      },
+      "gpu_load": {
+        "default": "mdi:expansion-card"
+      },
+      "gpu_temperature": {
+        "default": "mdi:thermometer"
+      },
+      "gpu_hotspot_temperature": {
+        "default": "mdi:thermometer-high"
+      },
+      "gpu_memory_usage": {
+        "default": "mdi:memory"
+      },
+      "gpu_memory_used": {
+        "default": "mdi:memory"
+      },
+      "gpu_power": {
+        "default": "mdi:flash"
+      },
+      "gpu_fan": {
+        "default": "mdi:fan"
+      },
+      "gpu_clock": {
+        "default": "mdi:speedometer"
+      },
+      "gpu_n_load": {
+        "default": "mdi:expansion-card"
+      },
+      "gpu_n_temperature": {
+        "default": "mdi:thermometer"
+      },
+      "gpu_n_hotspot_temperature": {
+        "default": "mdi:thermometer-high"
+      },
+      "gpu_n_memory_usage": {
+        "default": "mdi:memory"
+      },
+      "gpu_n_memory_used": {
+        "default": "mdi:memory"
+      },
+      "gpu_n_power": {
+        "default": "mdi:flash"
+      },
+      "gpu_n_fan": {
+        "default": "mdi:fan"
+      },
+      "gpu_n_clock": {
+        "default": "mdi:speedometer"
+      },
+      "fan": {
+        "default": "mdi:fan"
+      },
+      "drive_temperature": {
+        "default": "mdi:thermometer"
+      },
+      "drive_health": {
+        "default": "mdi:harddisk"
+      },
+      "drive_life_remaining": {
+        "default": "mdi:heart-pulse"
+      },
+      "session_state": {
+        "default": "mdi:account-lock",
+        "state": {
+          "active": "mdi:account-check",
+          "locked": "mdi:lock",
+          "logged_off": "mdi:account-off"
+        }
+      },
+      "windows_updates": {
+        "default": "mdi:microsoft-windows"
+      },
+      "defender_status": {
+        "default": "mdi:shield-check",
+        "state": {
+          "warning": "mdi:shield-alert",
+          "outdated": "mdi:shield-alert",
+          "disabled": "mdi:shield-off",
+          "action_required": "mdi:shield-alert"
+        }
+      },
+      "user_sessions": {
+        "default": "mdi:account-multiple"
+      },
+      "event_log_errors": {
+        "default": "mdi:alert-circle"
+      },
+      "failed_tasks": {
+        "default": "mdi:calendar-alert"
+      },
+      "last_backup": {
+        "default": "mdi:backup-restore"
+      },
+      "storage_pool_health": {
+        "default": "mdi:database"
+      },
+      "virtual_disk_health": {
+        "default": "mdi:harddisk"
+      },
+      "vm_state": {
+        "default": "mdi:server"
+      },
+      "vm_cpu": {
+        "default": "mdi:cpu-64-bit"
+      },
+      "vm_memory": {
+        "default": "mdi:memory"
+      },
+      "smb_sessions": {
+        "default": "mdi:folder-network"
+      },
+      "smb_open_files": {
+        "default": "mdi:file-lock"
+      },
+      "plex_streams": {
+        "default": "mdi:plex"
+      },
+      "plex_transcodes": {
+        "default": "mdi:plex"
+      },
+      "plex_bandwidth": {
+        "default": "mdi:speedometer"
+      },
+      "plex_library": {
+        "default": "mdi:filmstrip-box-multiple"
+      },
+      "foreground_app": {
+        "default": "mdi:application"
+      },
+      "open_apps": {
+        "default": "mdi:apps"
+      },
+      "idle_time": {
+        "default": "mdi:timer-sand"
+      },
+      "fullscreen_state": {
+        "default": "mdi:fullscreen"
+      },
+      "activity": {
+        "default": "mdi:account-clock",
+        "state": {
+          "locked": "mdi:lock",
+          "gaming": "mdi:controller",
+          "call": "mdi:phone-in-talk",
+          "afk": "mdi:account-off",
+          "working": "mdi:laptop",
+          "media": "mdi:play-circle",
+          "active": "mdi:account-check",
+          "logged_off": "mdi:logout"
+        }
+      },
+      "current_game": {
+        "default": "mdi:gamepad-variant"
+      },
+      "steam_status": {
+        "default": "mdi:steam"
+      },
+      "discord_voice_channel": {
+        "default": "mdi:headset"
+      },
+      "claude_code": {
+        "default": "mdi:robot",
+        "state": {
+          "working": "mdi:robot-excited",
+          "waiting": "mdi:robot-confused",
+          "error": "mdi:robot-dead",
+          "idle": "mdi:robot"
+        }
+      }
+    },
+    "binary_sensor": {
+      "pending_reboot": {
+        "default": "mdi:restart-alert"
+      },
+      "afk": {
+        "default": "mdi:account-check",
+        "state": {
+          "on": "mdi:account-off"
+        }
+      },
+      "monitor_power": {
+        "default": "mdi:monitor-off",
+        "state": {
+          "on": "mdi:monitor"
+        }
+      },
+      "webcam_in_use": {
+        "default": "mdi:webcam-off",
+        "state": {
+          "on": "mdi:webcam"
+        }
+      },
+      "microphone_in_use": {
+        "default": "mdi:microphone-off",
+        "state": {
+          "on": "mdi:microphone"
+        }
+      },
+      "gaming": {
+        "default": "mdi:controller-off",
+        "state": {
+          "on": "mdi:controller"
+        }
+      },
+      "steam_updating": {
+        "default": "mdi:download"
+      },
+      "discord_voice": {
+        "default": "mdi:headset-off",
+        "state": {
+          "on": "mdi:headset"
+        }
+      },
+      "discord_speaking": {
+        "default": "mdi:account-voice"
+      },
+      "app_running": {
+        "default": "mdi:application"
+      },
+      "plex_online": {
+        "default": "mdi:plex"
+      },
+      "plex_scanning": {
+        "default": "mdi:magnify-scan"
+      }
+    },
+    "switch": {
+      "windows_service": {
+        "default": "mdi:cog"
+      },
+      "vm": {
+        "default": "mdi:server"
+      },
+      "iis_site": {
+        "default": "mdi:web"
+      },
+      "docker_container": {
+        "default": "mdi:docker"
+      },
+      "discord_mute": {
+        "default": "mdi:microphone",
+        "state": {
+          "on": "mdi:microphone-off"
+        }
+      },
+      "discord_deafen": {
+        "default": "mdi:headphones",
+        "state": {
+          "on": "mdi:headphones-off"
+        }
+      },
+      "dark_mode": {
+        "default": "mdi:theme-light-dark"
+      },
+      "privacy_mode": {
+        "default": "mdi:incognito-off",
+        "state": {
+          "on": "mdi:incognito"
+        }
+      }
+    },
+    "button": {
+      "shutdown": {
+        "default": "mdi:power"
+      },
+      "restart": {
+        "default": "mdi:restart"
+      },
+      "sleep": {
+        "default": "mdi:sleep"
+      },
+      "hibernate": {
+        "default": "mdi:power-sleep"
+      },
+      "logoff": {
+        "default": "mdi:logout"
+      },
+      "restart_firmware": {
+        "default": "mdi:chip"
+      },
+      "lock": {
+        "default": "mdi:lock"
+      },
+      "monitor_off": {
+        "default": "mdi:monitor-off"
+      },
+      "monitor_wake": {
+        "default": "mdi:monitor"
+      },
+      "discord_leave": {
+        "default": "mdi:phone-hangup"
+      },
+      "wake_on_lan": {
+        "default": "mdi:lan-connect"
+      },
+      "command": {
+        "default": "mdi:console"
+      },
+      "plex_scan": {
+        "default": "mdi:refresh"
+      }
+    },
+    "number": {
+      "monitor_brightness": {
+        "default": "mdi:brightness-6"
+      }
+    },
+    "select": {
+      "audio_output": {
+        "default": "mdi:speaker"
+      },
+      "audio_input": {
+        "default": "mdi:microphone"
+      },
+      "power_plan": {
+        "default": "mdi:lightning-bolt"
+      }
+    },
+    "event": {
+      "notification_action": {
+        "default": "mdi:message-reply-text"
+      },
+      "hotkey": {
+        "default": "mdi:keyboard"
+      },
+      "tray_action": {
+        "default": "mdi:gesture-tap"
+      },
+      "game": {
+        "default": "mdi:gamepad-variant"
+      },
+      "claude_code_event": {
+        "default": "mdi:robot"
+      },
+      "system_event": {
+        "default": "mdi:alert"
+      },
+      "plex_playback": {
+        "default": "mdi:plex"
+      }
+    },
+    "notify": {
+      "notify": {
+        "default": "mdi:message-badge"
+      }
+    }
+  },
+  "services": {
+    "notify": {
+      "service": "mdi:message-badge"
+    },
+    "clear_notifications": {
+      "service": "mdi:message-off"
+    },
+    "open_url": {
+      "service": "mdi:open-in-new"
+    },
+    "speak": {
+      "service": "mdi:account-voice"
+    },
+    "set_clipboard": {
+      "service": "mdi:clipboard-text"
+    },
+    "power": {
+      "service": "mdi:power"
+    },
+    "run_command": {
+      "service": "mdi:console"
+    },
+    "vm_control": {
+      "service": "mdi:server"
+    },
+    "service_control": {
+      "service": "mdi:cog"
+    }
+  }
+}

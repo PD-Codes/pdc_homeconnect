@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PdcHomeConnect.Agent/PdcHomeConnect.Agent.csproj" />
+    <Project Path="src/PdcHomeConnect.Core/PdcHomeConnect.Core.csproj" />
+    <Project Path="src/PdcHomeConnect.DevHost/PdcHomeConnect.DevHost.csproj" />
+    <Project Path="src/PdcHomeConnect.Hook/PdcHomeConnect.Hook.csproj" />
+    <Project Path="src/PdcHomeConnect.Service/PdcHomeConnect.Service.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PdcHomeConnect.Tests/PdcHomeConnect.Tests.csproj" />
+  </Folder>
+</Solution>

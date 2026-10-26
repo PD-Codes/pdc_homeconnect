@@ -1,0 +1,26 @@
+# .NET
+bin/
+obj/
+client/artifacts/
+*.user
+*.suo
+.vs/
+*.binlog
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+Thumbs.db
+.DS_Store

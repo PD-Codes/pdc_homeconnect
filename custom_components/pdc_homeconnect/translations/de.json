@@ -1,0 +1,797 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "PC verbinden",
+        "description": "Gib die Adresse des PCs ein, auf dem der PDC-HomeConnect-Client läuft.",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        },
+        "data_description": {
+          "host": "IP-Adresse oder Hostname des PCs.",
+          "port": "Port des PDC-HomeConnect-Clients (Standard 48733)."
+        }
+      },
+      "zeroconf_confirm": {
+        "title": "PDC HomeConnect",
+        "description": "Möchtest du **{name}** verbinden?"
+      },
+      "pair": {
+        "title": "Mit {name} koppeln",
+        "description": "Auf **{name}** wird jetzt ein 6-stelliger Kopplungscode angezeigt (Windows-Benachrichtigung und Tray-Symbol). Gib ihn hier ein. Der Code ist 5 Minuten gültig.",
+        "data": {
+          "code": "Kopplungscode"
+        }
+      },
+      "reauth_confirm": {
+        "title": "{name} neu koppeln",
+        "description": "**{name}** akzeptiert die gespeicherten Zugangsdaten nicht mehr (z. B. nach einer Neuinstallation oder wenn die Kopplung entfernt wurde). Fahre fort, um einen neuen Kopplungscode anzufordern."
+      },
+      "reconfigure": {
+        "title": "Verbindung ändern",
+        "description": "Ändere die Adresse von **{name}**.",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung fehlgeschlagen. Prüfe die Adresse, ob der Client läuft und ob die Firewall die Verbindung erlaubt.",
+      "invalid_code": "Der Code ist falsch.",
+      "no_active_code": "Der Kopplungscode ist abgelaufen. Auf dem PC wird jetzt ein neuer Code angezeigt.",
+      "too_many_attempts": "Zu viele falsche Codes. Auf dem PC wird jetzt ein neuer Code angezeigt.",
+      "wrong_device": "Diese Adresse gehört zu einem anderen PC.",
+      "unknown": "Unerwarteter Fehler."
+    },
+    "abort": {
+      "already_configured": "Dieser PC ist bereits eingerichtet.",
+      "reauth_successful": "Die Neukopplung war erfolgreich.",
+      "reconfigure_successful": "Die Verbindung wurde aktualisiert.",
+      "cannot_connect": "Keine Verbindung zum PC möglich.",
+      "unsupported_protocol": "Die Client-Version passt nicht zu dieser Integration. Aktualisiere beide auf die neueste Version."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "cpu_load": {
+        "name": "CPU-Auslastung"
+      },
+      "cpu_temperature": {
+        "name": "CPU-Temperatur"
+      },
+      "cpu_power": {
+        "name": "CPU-Leistung"
+      },
+      "cpu_clock": {
+        "name": "CPU-Takt"
+      },
+      "memory_usage": {
+        "name": "Arbeitsspeicher-Auslastung"
+      },
+      "memory_used": {
+        "name": "Arbeitsspeicher belegt"
+      },
+      "disk_usage": {
+        "name": "Laufwerk {disk} belegt"
+      },
+      "network_download": {
+        "name": "Netzwerk-Download"
+      },
+      "network_upload": {
+        "name": "Netzwerk-Upload"
+      },
+      "last_boot": {
+        "name": "Letzter Start"
+      },
+      "battery": {
+        "name": "Akku"
+      },
+      "gpu_load": {
+        "name": "GPU-Auslastung"
+      },
+      "gpu_temperature": {
+        "name": "GPU-Temperatur"
+      },
+      "gpu_hotspot_temperature": {
+        "name": "GPU-Hotspot-Temperatur"
+      },
+      "gpu_memory_usage": {
+        "name": "GPU-Speicher-Auslastung"
+      },
+      "gpu_memory_used": {
+        "name": "GPU-Speicher belegt"
+      },
+      "gpu_power": {
+        "name": "GPU-Leistung"
+      },
+      "gpu_fan": {
+        "name": "GPU-Lüfter"
+      },
+      "gpu_clock": {
+        "name": "GPU-Takt"
+      },
+      "gpu_n_load": {
+        "name": "GPU {index} Auslastung"
+      },
+      "gpu_n_temperature": {
+        "name": "GPU {index} Temperatur"
+      },
+      "gpu_n_hotspot_temperature": {
+        "name": "GPU {index} Hotspot-Temperatur"
+      },
+      "gpu_n_memory_usage": {
+        "name": "GPU {index} Speicher-Auslastung"
+      },
+      "gpu_n_memory_used": {
+        "name": "GPU {index} Speicher belegt"
+      },
+      "gpu_n_power": {
+        "name": "GPU {index} Leistung"
+      },
+      "gpu_n_fan": {
+        "name": "GPU {index} Lüfter"
+      },
+      "gpu_n_clock": {
+        "name": "GPU {index} Takt"
+      },
+      "fan": {
+        "name": "Lüfter {name}"
+      },
+      "drive_temperature": {
+        "name": "{drive} Temperatur"
+      },
+      "drive_health": {
+        "name": "{drive} Zustand",
+        "state": {
+          "healthy": "Gesund",
+          "warning": "Warnung",
+          "unhealthy": "Fehlerhaft",
+          "unknown": "Unbekannt"
+        }
+      },
+      "drive_life_remaining": {
+        "name": "{drive} Restlebensdauer"
+      },
+      "session_state": {
+        "name": "Sitzung",
+        "state": {
+          "active": "Aktiv",
+          "locked": "Gesperrt",
+          "disconnected": "Getrennt",
+          "logged_off": "Abgemeldet"
+        }
+      },
+      "windows_updates": {
+        "name": "Windows-Updates"
+      },
+      "defender_status": {
+        "name": "Defender",
+        "state": {
+          "ok": "OK",
+          "warning": "Warnung",
+          "outdated": "Signaturen veraltet",
+          "disabled": "Deaktiviert",
+          "action_required": "Aktion erforderlich",
+          "passive": "Passiv (anderer Virenschutz)",
+          "unknown": "Unbekannt"
+        }
+      },
+      "user_sessions": {
+        "name": "Benutzersitzungen"
+      },
+      "event_log_errors": {
+        "name": "Ereignisprotokoll-Fehler (24 h)"
+      },
+      "failed_tasks": {
+        "name": "Fehlgeschlagene Aufgaben"
+      },
+      "last_backup": {
+        "name": "Letzte Sicherung"
+      },
+      "storage_pool_health": {
+        "name": "Speicherpool {pool}",
+        "state": {
+          "healthy": "Gesund",
+          "warning": "Warnung",
+          "unhealthy": "Fehlerhaft",
+          "unknown": "Unbekannt"
+        }
+      },
+      "virtual_disk_health": {
+        "name": "Virtueller Datenträger {disk}",
+        "state": {
+          "healthy": "Gesund",
+          "warning": "Warnung",
+          "unhealthy": "Fehlerhaft",
+          "unknown": "Unbekannt"
+        }
+      },
+      "vm_state": {
+        "name": "VM {vm} Status",
+        "state": {
+          "running": "Läuft",
+          "off": "Aus",
+          "saved": "Gespeichert",
+          "paused": "Pausiert",
+          "starting": "Startet",
+          "stopping": "Fährt herunter",
+          "saving": "Speichert",
+          "pausing": "Wird pausiert",
+          "resuming": "Wird fortgesetzt",
+          "other": "Sonstiges"
+        }
+      },
+      "vm_cpu": {
+        "name": "VM {vm} CPU"
+      },
+      "vm_memory": {
+        "name": "VM {vm} Arbeitsspeicher"
+      },
+      "smb_sessions": {
+        "name": "SMB-Sitzungen"
+      },
+      "smb_open_files": {
+        "name": "Geöffnete SMB-Dateien"
+      },
+      "plex_streams": {
+        "name": "Plex-Streams"
+      },
+      "plex_transcodes": {
+        "name": "Plex-Transkodierungen"
+      },
+      "plex_bandwidth": {
+        "name": "Plex-Bandbreite"
+      },
+      "plex_library": {
+        "name": "Plex {library}"
+      },
+      "foreground_app": {
+        "name": "Aktive App"
+      },
+      "open_apps": {
+        "name": "Offene Apps"
+      },
+      "idle_time": {
+        "name": "Inaktivität"
+      },
+      "fullscreen_state": {
+        "name": "Vollbild",
+        "state": {
+          "none": "Keins",
+          "fullscreen": "Vollbild-App",
+          "game": "Spiel (exklusiv)",
+          "presentation": "Präsentation",
+          "quiet_time": "Ruhezeit",
+          "app": "Store-App",
+          "away": "Abwesend"
+        }
+      },
+      "activity": {
+        "name": "Aktivität",
+        "state": {
+          "locked": "Gesperrt",
+          "gaming": "Zockt",
+          "call": "Im Call",
+          "afk": "Abwesend (AFK)",
+          "working": "Arbeitet",
+          "media": "Medien",
+          "active": "Aktiv",
+          "logged_off": "Abgemeldet",
+          "unknown": "Unbekannt"
+        }
+      },
+      "current_game": {
+        "name": "Aktuelles Spiel"
+      },
+      "steam_status": {
+        "name": "Steam",
+        "state": {
+          "offline": "Offline",
+          "online": "Online",
+          "in_game": "Im Spiel"
+        }
+      },
+      "discord_voice_channel": {
+        "name": "Discord-Sprachkanal"
+      },
+      "claude_code": {
+        "name": "Claude Code",
+        "state": {
+          "idle": "Bereit",
+          "working": "Arbeitet",
+          "waiting": "Wartet auf Eingabe",
+          "error": "Fehler"
+        }
+      }
+    },
+    "binary_sensor": {
+      "online": {
+        "name": "Online"
+      },
+      "pending_reboot": {
+        "name": "Neustart ausstehend"
+      },
+      "battery_charging": {
+        "name": "Lädt"
+      },
+      "power_plugged": {
+        "name": "Netzteil angeschlossen"
+      },
+      "afk": {
+        "name": "AFK"
+      },
+      "monitor_power": {
+        "name": "Bildschirme"
+      },
+      "webcam_in_use": {
+        "name": "Webcam aktiv"
+      },
+      "microphone_in_use": {
+        "name": "Mikrofon aktiv"
+      },
+      "gaming": {
+        "name": "Zockt"
+      },
+      "steam_updating": {
+        "name": "Steam lädt herunter"
+      },
+      "discord_voice": {
+        "name": "Discord-Sprachchat"
+      },
+      "discord_speaking": {
+        "name": "Spricht in Discord"
+      },
+      "app_running": {
+        "name": "{app}"
+      },
+      "plex_online": {
+        "name": "Plex Media Server"
+      },
+      "plex_scanning": {
+        "name": "Plex-Bibliothekscan"
+      }
+    },
+    "switch": {
+      "windows_service": {
+        "name": "Dienst {service}"
+      },
+      "vm": {
+        "name": "VM {vm}"
+      },
+      "iis_site": {
+        "name": "IIS {site}"
+      },
+      "docker_container": {
+        "name": "Container {container}"
+      },
+      "discord_mute": {
+        "name": "Discord stumm"
+      },
+      "discord_deafen": {
+        "name": "Discord taub"
+      },
+      "dark_mode": {
+        "name": "Dunkelmodus"
+      },
+      "privacy_mode": {
+        "name": "Privatsphäre-Modus"
+      }
+    },
+    "button": {
+      "shutdown": {
+        "name": "Herunterfahren"
+      },
+      "restart": {
+        "name": "Neu starten"
+      },
+      "sleep": {
+        "name": "Energie sparen"
+      },
+      "hibernate": {
+        "name": "Ruhezustand"
+      },
+      "logoff": {
+        "name": "Abmelden"
+      },
+      "restart_firmware": {
+        "name": "Neustart ins UEFI"
+      },
+      "lock": {
+        "name": "Sperren"
+      },
+      "monitor_off": {
+        "name": "Bildschirme aus"
+      },
+      "monitor_wake": {
+        "name": "Bildschirme an"
+      },
+      "discord_leave": {
+        "name": "Discord-Sprachkanal verlassen"
+      },
+      "wake_on_lan": {
+        "name": "Wake-on-LAN"
+      },
+      "command": {
+        "name": "{command}"
+      },
+      "plex_scan": {
+        "name": "Plex-Bibliotheken scannen"
+      }
+    },
+    "number": {
+      "monitor_brightness": {
+        "name": "Bildschirm {monitor} Helligkeit"
+      }
+    },
+    "select": {
+      "audio_output": {
+        "name": "Audioausgabe"
+      },
+      "audio_input": {
+        "name": "Audioeingabe"
+      },
+      "power_plan": {
+        "name": "Energiesparplan"
+      }
+    },
+    "media_player": {
+      "media": {
+        "name": "Medien"
+      }
+    },
+    "event": {
+      "notification_action": {
+        "name": "Benachrichtigungsaktion",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "action": "Schaltfläche gedrückt",
+              "reply": "Antwort",
+              "dismissed": "Verworfen"
+            }
+          }
+        }
+      },
+      "hotkey": {
+        "name": "Tastenkürzel"
+      },
+      "tray_action": {
+        "name": "Tray-Aktion"
+      },
+      "game": {
+        "name": "Spiel",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "started": "Gestartet",
+              "stopped": "Beendet"
+            }
+          }
+        }
+      },
+      "claude_code_event": {
+        "name": "Claude-Code-Ereignis",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "prompt_submitted": "Prompt gesendet",
+              "waiting_for_input": "Wartet auf Eingabe",
+              "finished": "Fertig",
+              "failed": "Fehlgeschlagen",
+              "session_started": "Sitzung gestartet",
+              "session_ended": "Sitzung beendet"
+            }
+          }
+        }
+      },
+      "system_event": {
+        "name": "Systemereignis",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "critical": "Kritisch",
+              "error": "Fehler"
+            }
+          }
+        }
+      },
+      "plex_playback": {
+        "name": "Plex-Wiedergabe",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "started": "Gestartet",
+              "stopped": "Beendet",
+              "paused": "Pausiert",
+              "resumed": "Fortgesetzt"
+            }
+          }
+        }
+      }
+    },
+    "update": {
+      "client": {
+        "name": "Client"
+      }
+    },
+    "notify": {
+      "notify": {
+        "name": "Benachrichtigung"
+      }
+    }
+  },
+  "services": {
+    "notify": {
+      "name": "Benachrichtigung senden",
+      "description": "Zeigt eine Windows-Benachrichtigung auf dem PC an.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "Der/die PC(s), an den/die diese Aktion gesendet wird."
+        },
+        "message": {
+          "name": "Nachricht",
+          "description": "Text der Benachrichtigung."
+        },
+        "title": {
+          "name": "Titel",
+          "description": "Titel der Benachrichtigung."
+        },
+        "image": {
+          "name": "Bild",
+          "description": "Kamera-Entität (camera.xyz), Bild-URL oder /local/...-Pfad."
+        },
+        "actions": {
+          "name": "Schaltflächen",
+          "description": "Bis zu 5 Schaltflächen: Liste aus {action, title}. Ein Klick löst das Benachrichtigungsaktions-Ereignis aus."
+        },
+        "reply": {
+          "name": "Antwortfeld",
+          "description": "Platzhaltertext für ein Antwort-Textfeld. Die Antwort löst das Benachrichtigungsaktions-Ereignis aus."
+        },
+        "scenario": {
+          "name": "Szenario",
+          "description": "Erinnerung und Alarm bleiben sichtbar, bis sie geschlossen werden."
+        },
+        "sound": {
+          "name": "Ton",
+          "description": "Benachrichtigungston."
+        },
+        "duration": {
+          "name": "Dauer",
+          "description": "Wie lange die Benachrichtigung sichtbar bleibt."
+        },
+        "tag": {
+          "name": "Tag",
+          "description": "Kennung, um diese Benachrichtigung später zu ersetzen oder zu löschen."
+        },
+        "fullscreen_fallback": {
+          "name": "Vollbild-Ersatz",
+          "description": "Was passieren soll, wenn Windows Benachrichtigungen wegen einer Vollbild-App oder eines Spiels unterdrückt."
+        }
+      }
+    },
+    "clear_notifications": {
+      "name": "Benachrichtigungen löschen",
+      "description": "Entfernt Benachrichtigungen aus dem Windows-Benachrichtigungscenter.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "Der/die PC(s), an den/die diese Aktion gesendet wird."
+        },
+        "tag": {
+          "name": "Tag",
+          "description": "Nur die Benachrichtigung mit diesem Tag entfernen. Leer lassen, um alle zu entfernen."
+        }
+      }
+    },
+    "open_url": {
+      "name": "URL öffnen",
+      "description": "Öffnet eine URL mit der Standard-App (Browser, Steam, Discord, ...).",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "Der/die PC(s), an den/die diese Aktion gesendet wird."
+        },
+        "url": {
+          "name": "URL",
+          "description": "Die zu öffnende URL. Erlaubte Schemata werden am PC konfiguriert."
+        }
+      }
+    },
+    "speak": {
+      "name": "Sprechen",
+      "description": "Liest einen Text mit einer Windows-Stimme auf dem PC vor.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "Der/die PC(s), an den/die diese Aktion gesendet wird."
+        },
+        "message": {
+          "name": "Nachricht",
+          "description": "Zu sprechender Text."
+        },
+        "language": {
+          "name": "Sprache",
+          "description": "Sprache der Stimme, z. B. de-DE oder en-US."
+        }
+      }
+    },
+    "set_clipboard": {
+      "name": "Zwischenablage setzen",
+      "description": "Kopiert Text in die Zwischenablage des PCs.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "Der/die PC(s), an den/die diese Aktion gesendet wird."
+        },
+        "text": {
+          "name": "Text",
+          "description": "Zu kopierender Text."
+        }
+      }
+    },
+    "power": {
+      "name": "Energieaktion",
+      "description": "Fährt den PC herunter, startet ihn neu oder versetzt ihn in den Energiesparmodus, optional verzögert.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "Der/die PC(s), an den/die diese Aktion gesendet wird."
+        },
+        "action": {
+          "name": "Aktion",
+          "description": "Was passieren soll."
+        },
+        "delay": {
+          "name": "Verzögerung",
+          "description": "Wartezeit in Sekunden (der Benutzer sieht eine Warnung)."
+        },
+        "force": {
+          "name": "Erzwingen",
+          "description": "Apps ohne Nachfrage schließen (nicht gespeicherte Daten gehen verloren)."
+        }
+      }
+    },
+    "run_command": {
+      "name": "Befehl ausführen",
+      "description": "Führt einen Befehl aus, der in der Client-Konfiguration auf dem PC definiert ist.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "Der/die PC(s), an den/die diese Aktion gesendet wird."
+        },
+        "command": {
+          "name": "Befehl",
+          "description": "Id des Befehls aus der PC-Konfiguration."
+        }
+      }
+    },
+    "vm_control": {
+      "name": "Virtuelle Maschine steuern",
+      "description": "Startet, stoppt, speichert oder pausiert eine Hyper-V-VM.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "Der/die PC(s), an den/die diese Aktion gesendet wird."
+        },
+        "vm": {
+          "name": "Virtuelle Maschine",
+          "description": "Name der virtuellen Maschine."
+        },
+        "action": {
+          "name": "Aktion",
+          "description": "Was passieren soll."
+        }
+      }
+    },
+    "service_control": {
+      "name": "Windows-Dienst steuern",
+      "description": "Startet, stoppt oder startet einen überwachten Windows-Dienst neu.",
+      "fields": {
+        "device_id": {
+          "name": "PC",
+          "description": "Der/die PC(s), an den/die diese Aktion gesendet wird."
+        },
+        "service": {
+          "name": "Dienst",
+          "description": "Dienstname (muss in der Liste der überwachten Dienste am PC stehen)."
+        },
+        "action": {
+          "name": "Aktion",
+          "description": "Was passieren soll."
+        }
+      }
+    }
+  },
+  "selector": {
+    "scenario": {
+      "options": {
+        "default": "Standard",
+        "reminder": "Erinnerung",
+        "alarm": "Alarm",
+        "urgent": "Dringend"
+      }
+    },
+    "sound": {
+      "options": {
+        "default": "Standard",
+        "silent": "Stumm",
+        "im": "Nachricht",
+        "mail": "Mail",
+        "reminder": "Erinnerung",
+        "sms": "SMS",
+        "alarm": "Alarm",
+        "call": "Anruf"
+      }
+    },
+    "duration": {
+      "options": {
+        "short": "Kurz",
+        "long": "Lang"
+      }
+    },
+    "fullscreen_fallback": {
+      "options": {
+        "auto": "Nur Benachrichtigung",
+        "sound": "Ton abspielen",
+        "speak": "Vorlesen"
+      }
+    },
+    "power_action": {
+      "options": {
+        "shutdown": "Herunterfahren",
+        "restart": "Neu starten",
+        "sleep": "Energie sparen",
+        "hibernate": "Ruhezustand",
+        "logoff": "Abmelden",
+        "abort": "Geplantes Herunterfahren abbrechen"
+      }
+    },
+    "vm_action": {
+      "options": {
+        "start": "Starten",
+        "shutdown": "Herunterfahren (Gast)",
+        "turn_off": "Ausschalten (hart)",
+        "save": "Speichern",
+        "pause": "Pausieren",
+        "resume": "Fortsetzen",
+        "reset": "Zurücksetzen"
+      }
+    },
+    "service_action": {
+      "options": {
+        "start": "Starten",
+        "stop": "Stoppen",
+        "restart": "Neu starten"
+      }
+    }
+  },
+  "exceptions": {
+    "not_connected": {
+      "message": "{name} ist nicht verbunden."
+    },
+    "command_failed": {
+      "message": "Der PC meldet einen Fehler: {error}"
+    },
+    "no_devices": {
+      "message": "Kein PDC-HomeConnect-Gerät ausgewählt."
+    },
+    "image_failed": {
+      "message": "Das Bild konnte nicht geladen werden: {error}"
+    }
+  },
+  "issues": {
+    "client_outdated": {
+      "title": "Client auf {name} ist veraltet",
+      "description": "Der PDC-HomeConnect-Client auf {name} verwendet Protokoll {client_protocol}, die Integration erwartet {protocol}. Aktualisiere den Client auf dem PC."
+    },
+    "integration_outdated": {
+      "title": "Integration ist älter als der Client auf {name}",
+      "description": "Der Client auf {name} verwendet Protokoll {client_protocol}, diese Integration unterstützt nur {protocol}. Aktualisiere die Integration über HACS."
+    }
+  }
+}

@@ -1,0 +1,73 @@
+// PDC HomeConnect - service settings
+// Changes are applied automatically after saving (the service restarts its modules).
+// Docs: https://github.com/PD-Codes/pdc_homeconnect/blob/main/docs/CONFIGURATION.md
+{
+  // Name shown in Home Assistant. null = computer name.
+  "device_name": null,
+
+  // TCP port for Home Assistant (TLS WebSocket).
+  "port": 48733,
+
+  // Announce this PC via mDNS so Home Assistant discovers it automatically.
+  "discovery": true,
+
+  // Create the Windows Firewall rules automatically.
+  "manage_firewall": true,
+  // "local_subnet" = only devices in the local network (recommended), "any" = also other subnets/VLANs.
+  "firewall_scope": "local_subnet",
+
+  // Update intervals in seconds. State changes (games, lock, calls, ...) are always pushed instantly.
+  "stats_interval": 10,
+  "hardware_interval": 10,
+
+  // CPU temperatures, fans and drive SMART data (LibreHardwareMonitor + PawnIO driver).
+  // NVIDIA GPUs are always read directly from the driver.
+  "hardware_sensors": true,
+
+  // Restart the tray app in user sessions if it is not running.
+  "agent_watchdog": true,
+
+  // Offer the "Restart to UEFI" button.
+  "allow_firmware_restart": true,
+
+  // How often to check for pending Windows updates (hours).
+  "windows_update_check_hours": 6,
+
+  // Modules: "auto" (enabled when the feature exists / on Windows Server), "on" or "off".
+  "modules": {
+    "services": "auto",
+    "hyper_v": "auto",
+    "sessions": "on",
+    "event_log": "auto",
+    "scheduled_tasks": "auto",
+    "backup": "auto",
+    "storage_health": "on",
+    "iis": "auto",
+    "docker": "auto",
+    "smb": "auto",
+    "plex": "auto",
+    "windows_update": "on",
+    "defender": "on",
+    "power_plan": "on"
+  },
+
+  // Windows services exposed as switches (start/stop). Use the service name, e.g. "Spooler".
+  "watched_services": [],
+
+  "event_log": {
+    // Also fire the "System event" entity for errors (not only critical events). Can be noisy.
+    "events_for_errors": false,
+    "logs": ["System", "Application"]
+  },
+
+  "plex": {
+    "url": "http://127.0.0.1:32400",
+    // Leave empty to read the token automatically from the Plex registry settings.
+    "token": ""
+  },
+
+  // Commands Home Assistant may run as SYSTEM (button entities + pdc_homeconnect.run_command).
+  // Only commands listed here can be run. Example:
+  // { "id": "flush_dns", "name": "Flush DNS", "command": "ipconfig", "args": "/flushdns", "wait": true }
+  "commands": []
+}
