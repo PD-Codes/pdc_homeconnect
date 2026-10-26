@@ -97,6 +97,12 @@ public sealed class NotificationModule : EntityProvider
         }
 
         var scenario = parameters.GetString("scenario") ?? "default";
+        if (scenario == "urgent" && Environment.OSVersion.Version.Build < 22546)
+        {
+            // "urgent" needs Windows 11 22H2; older builds get the closest match.
+            scenario = "reminder";
+        }
+
         var hasButtons = actions.Count > 0 || !string.IsNullOrWhiteSpace(reply);
         if (scenario is "reminder" or "alarm" && !hasButtons)
         {

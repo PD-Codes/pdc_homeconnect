@@ -5,13 +5,13 @@
 #define AppName "PDC HomeConnect"
 #define ServiceName "PdcHomeConnect"
 #ifndef AppVersion
-  #define AppVersion "0.1.0"
+  #define AppVersion "0.1.1"
 #endif
 #ifndef SourceDir
-  #define SourceDir "..\..\artifacts\publish"
+  #define SourceDir "..\artifacts\publish"
 #endif
 #ifndef OutputDir
-  #define OutputDir "..\..\artifacts"
+  #define OutputDir "..\artifacts"
 #endif
 
 [Setup]
@@ -64,7 +64,10 @@ Root: HKLM; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: 
 Filename: "{app}\PdcHomeConnect.Agent.exe"; Parameters: "--autostart"; Flags: nowait runasoriginaluser; Check: not WizardSilent
 
 [UninstallRun]
+; No automatic restart while uninstalling (a forced stop would count as a crash).
+Filename: "{sys}\sc.exe"; Parameters: "failure {#ServiceName} reset= 0 actions= """""; Flags: runhidden waituntilterminated; RunOnceId: "NoRecovery"
 Filename: "{sys}\net.exe"; Parameters: "stop {#ServiceName}"; Flags: runhidden waituntilterminated; RunOnceId: "StopService"
+Filename: "{sys}\taskkill.exe"; Parameters: "/F /IM PdcHomeConnect.Service.exe"; Flags: runhidden waituntilterminated; RunOnceId: "KillService"
 Filename: "{sys}\taskkill.exe"; Parameters: "/F /IM PdcHomeConnect.Agent.exe"; Flags: runhidden waituntilterminated; RunOnceId: "KillAgents"
 Filename: "{app}\PdcHomeConnect.Agent.exe"; Parameters: "--uninstall-cleanup"; Flags: runhidden waituntilterminated skipifdoesntexist; RunOnceId: "AgentCleanup"
 Filename: "{sys}\sc.exe"; Parameters: "delete {#ServiceName}"; Flags: runhidden waituntilterminated; RunOnceId: "DeleteService"
@@ -99,11 +102,15 @@ end;
 function PrepareToInstall(var NeedsRestart: Boolean): String;
 begin
   if ServiceExists() then
+  begin
+    { A forced stop must not trigger the automatic restart (re-enabled in RegisterService). }
+    ExecHidden(ExpandConstant('{sys}\sc.exe'), 'failure {#ServiceName} reset= 0 actions= ""');
     ExecHidden(ExpandConstant('{sys}\net.exe'), 'stop {#ServiceName}');
+  end;
   ExecHidden(ExpandConstant('{sys}\taskkill.exe'), '/F /IM PdcHomeConnect.Service.exe');
   ExecHidden(ExpandConstant('{sys}\taskkill.exe'), '/F /IM PdcHomeConnect.Agent.exe');
   ExecHidden(ExpandConstant('{sys}\taskkill.exe'), '/F /IM pdc-hc-hook.exe');
-  Sleep(800);
+  Sleep(2000);
   Result := '';
 end;
 

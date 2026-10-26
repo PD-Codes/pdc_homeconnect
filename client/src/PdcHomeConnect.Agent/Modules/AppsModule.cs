@@ -157,9 +157,12 @@ public sealed class AppsModule : EntityProvider, IDisposable
             }
         }
 
-        foreach (var stale in _paths.Keys.Where(pid => !alive.Contains(pid)).ToList())
+        lock (_paths)
         {
-            _paths.Remove(stale);
+            foreach (var stale in _paths.Keys.Where(pid => !alive.Contains(pid)).ToList())
+            {
+                _paths.Remove(stale);
+            }
         }
 
         _context.Signals.RunningProcesses = names;

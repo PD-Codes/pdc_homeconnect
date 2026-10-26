@@ -42,16 +42,22 @@ internal static class Program
         }
     }
 
-    /// <summary>Called by the uninstaller: removes the Claude Code hooks and the toast registration of this user.</summary>
+    /// <summary>
+    /// Called by the (elevated) uninstaller: removes the Claude Code hooks of all user profiles
+    /// (they would point to the deleted hook helper) and the toast registration of this user.
+    /// </summary>
     private static int UninstallCleanup()
     {
-        try
+        foreach (var settings in ClaudeHooks.AllProfileSettings())
         {
-            ClaudeHooks.Uninstall();
-        }
-        catch
-        {
-            // Best effort.
+            try
+            {
+                ClaudeHooks.Uninstall(settings);
+            }
+            catch
+            {
+                // Best effort: unreadable or locked file.
+            }
         }
 
         try

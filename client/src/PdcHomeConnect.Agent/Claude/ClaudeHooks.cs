@@ -26,14 +26,14 @@ public static class ClaudeHooks
 
     public static bool IsInstalled()
     {
-        var settings = Load();
+        var settings = Load(SettingsPath);
         return settings?["hooks"] is JsonObject hooks && Events.All(e => hooks[e] is JsonArray groups && groups.Any(IsOurs));
     }
 
     /// <summary>Adds (or updates) our hooks. Returns false if nothing had to be changed.</summary>
     public static bool Install(string hookExecutable)
     {
-        var settings = Load() ?? [];
+        var settings = Load(SettingsPath) ?? [];
         var hooks = settings["hooks"] as JsonObject;
         if (hooks is null)
         {
@@ -77,16 +77,19 @@ public static class ClaudeHooks
 
         if (changed)
         {
-            Save(settings);
+            Save(SettingsPath, settings);
         }
 
         return changed;
     }
 
-    /// <summary>Removes our hooks and leaves everything else untouched.</summary>
-    public static bool Uninstall()
+    /// <summary>Removes our hooks from the current user's settings and leaves everything else untouched.</summary>
+    public static bool Uninstall() => Uninstall(SettingsPath);
+
+    /// <summary>Removes our hooks from a settings.json (used by the uninstaller for all user profiles).</summary>
+    public static bool Uninstall(string settingsPath)
     {
-        var settings = Load();
+        var settings = Load(settingsPath);
         if (settings?["hooks"] is not JsonObject hooks)
         {
             return false;
@@ -119,10 +122,37 @@ public static class ClaudeHooks
 
         if (changed)
         {
-            Save(settings);
+            Save(settingsPath, settings);
         }
 
         return changed;
+    }
+
+    /// <summary>Claude Code settings files of all local user profiles (for the uninstaller, needs admin rights).</summary>
+    public static IEnumerable<string> AllProfileSettings()
+    {
+        var profiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) };
+        try
+        {
+            using var list = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList");
+            foreach (var sid in list?.GetSubKeyNames() ?? [])
+            {
+                using var profile = list!.OpenSubKey(sid);
+                if (profile?.GetValue("ProfileImagePath") is string path && path.Length > 0)
+                {
+                    profiles.Add(Environment.ExpandEnvironmentVariables(path));
+                }
+            }
+        }
+        catch
+        {
+            // Only the current profile.
+        }
+
+        return profiles
+            .Select(p => Path.Combine(p, ".claude", "settings.json"))
+            .Where(File.Exists)
+            .ToList();
     }
 
     private static bool IsOurs(JsonNode? group) => Command(group) is not null;
@@ -154,14 +184,14 @@ public static class ClaudeHooks
         return null;
     }
 
-    private static JsonObject? Load()
+    private static JsonObject? Load(string settingsPath)
     {
-        if (!File.Exists(SettingsPath))
+        if (!File.Exists(settingsPath))
         {
             return null;
         }
 
-        var text = File.ReadAllText(SettingsPath);
+        var text = File.ReadAllText(settingsPath);
         if (string.IsNullOrWhiteSpace(text))
         {
             return [];
@@ -172,17 +202,17 @@ public static class ClaudeHooks
             ?? throw new InvalidDataException("settings.json is not a JSON object.");
     }
 
-    private static void Save(JsonObject settings)
+    private static void Save(string settingsPath, JsonObject settings)
     {
-        Directory.CreateDirectory(ClaudeDirectory);
-        var backup = SettingsPath + ".pdc-backup";
-        if (File.Exists(SettingsPath) && !File.Exists(backup))
+        Directory.CreateDirectory(Path.GetDirectoryName(settingsPath)!);
+        var backup = settingsPath + ".pdc-backup";
+        if (File.Exists(settingsPath) && !File.Exists(backup))
         {
-            File.Copy(SettingsPath, backup);
+            File.Copy(settingsPath, backup);
         }
 
-        var tmp = SettingsPath + ".pdc-tmp";
+        var tmp = settingsPath + ".pdc-tmp";
         File.WriteAllText(tmp, settings.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine);
-        File.Move(tmp, SettingsPath, overwrite: true);
+        File.Move(tmp, settingsPath, overwrite: true);
     }
 }

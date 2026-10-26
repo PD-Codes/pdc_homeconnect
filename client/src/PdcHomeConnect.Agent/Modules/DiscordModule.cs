@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Net.Http.Json;
 using System.Text.Json.Nodes;
 using PdcHomeConnect.Agent.Discord;
@@ -23,7 +24,7 @@ public sealed class DiscordModule : EntityProvider, IDisposable
     private readonly AsyncSignal _wake = new();
     private readonly object _gate = new();
     private readonly Dictionary<string, Member> _members = [];
-    private readonly Dictionary<string, string> _guildNames = [];
+    private readonly ConcurrentDictionary<string, string> _guildNames = new();
     private DiscordRpcClient? _rpc;
     private CancellationToken _token;
     private bool _authorizeRequested;
@@ -53,7 +54,14 @@ public sealed class DiscordModule : EntityProvider, IDisposable
             if (_status != value)
             {
                 _status = value;
-                StatusChanged?.Invoke();
+                try
+                {
+                    StatusChanged?.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogDebug(ex, "Status listener failed");
+                }
             }
         }
     }

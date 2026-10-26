@@ -2,7 +2,7 @@
   <!-- Shared build settings for all PDC HomeConnect client projects. -->
   <PropertyGroup>
     <!-- Single source of truth for the client version (keep in sync with manifest.json). -->
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Company>PD-Codes</Company>
     <Product>PDC HomeConnect</Product>
     <Authors>PD-Codes</Authors>

@@ -16,7 +16,7 @@ public sealed class DisplayModule : EntityProvider, IDisposable
     private readonly SemaphoreSlim _monitorGate = new(1, 1);
     private List<IBrightnessMonitor> _monitors = [];
     private RegistryWatcher? _themeWatcher;
-    private string _signature = string.Empty;
+    private string? _signature;
 
     public DisplayModule(AgentContext context, ILogger<DisplayModule> logger)
         : base("display", context.Hub, logger)

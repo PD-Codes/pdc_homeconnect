@@ -20,7 +20,7 @@ public sealed class TrayContext : ApplicationContext
     private readonly Icon _iconConnected;
     private readonly Icon _iconDisconnected;
     private readonly Icon _iconPairing;
-    private AgentStatus _status;
+    private AgentStatus _status = null!;
     private StatusForm? _statusForm;
     private DiscordSetupForm? _discordForm;
     private bool _exiting;
@@ -29,7 +29,6 @@ public sealed class TrayContext : ApplicationContext
     {
         _host = host;
         _logger = logger;
-        _status = host.Status;
         _iconConnected = LoadIcon("tray-connected.ico");
         _iconDisconnected = LoadIcon("tray-disconnected.ico");
         _iconPairing = LoadIcon("tray-pairing.ico");
@@ -56,7 +55,9 @@ public sealed class TrayContext : ApplicationContext
             }
         };
 
+        // Subscribe first, then read: a status change in between must not be lost.
         host.StatusChanged += status => host.Context.Ui.Post(() => OnStatusChanged(status));
+        _status = host.Status;
         OnStatusChanged(_status);
     }
 

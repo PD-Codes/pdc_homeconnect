@@ -120,9 +120,16 @@ public sealed class DiscordSetupForm : Form
 
     private void OnModuleStatusChanged()
     {
-        if (IsHandleCreated && !IsDisposed)
+        try
         {
-            BeginInvoke(UpdateStatus);
+            if (IsHandleCreated && !IsDisposed)
+            {
+                BeginInvoke(UpdateStatus);
+            }
+        }
+        catch (InvalidOperationException)
+        {
+            // The form was closed in the meantime.
         }
     }
 

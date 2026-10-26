@@ -33,8 +33,9 @@ public static class AudioPlayback
         // Do not show up as a media session (would appear as "now playing" in our own media player).
         player.CommandManager.IsEnabled = false;
         player.Source = source;
-        player.MediaEnded += (_, _) => Release(player);
-        player.MediaFailed += (_, _) => Release(player);
+        // Dispose outside of the player's own event callbacks.
+        player.MediaEnded += (_, _) => Task.Run(() => Release(player));
+        player.MediaFailed += (_, _) => Task.Run(() => Release(player));
         lock (Gate)
         {
             if (Active.Count >= 8)

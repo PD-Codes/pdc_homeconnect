@@ -7,7 +7,7 @@ from typing import Final
 from homeassistant.const import Platform
 
 DOMAIN: Final = "pdc_homeconnect"
-INTEGRATION_VERSION: Final = "0.1.0"
+INTEGRATION_VERSION: Final = "0.1.1"
 
 # Wire protocol version, must match the Windows client.
 PROTOCOL_VERSION: Final = 1
