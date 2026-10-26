@@ -1,0 +1,50 @@
+name: Release
+
+# Publish a GitHub release with a tag like "v0.2.0" (same version as custom_components/pdc_homeconnect/manifest.json).
+# This workflow builds the Windows installer and attaches it (plus SHA256SUMS.txt for the self-update) to the release.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  installer:
+    name: Windows installer
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Check versions
+        shell: pwsh
+        run: |
+          $tag = "${{ github.event.release.tag_name }}".TrimStart('v')
+          $manifest = (Get-Content custom_components/pdc_homeconnect/manifest.json -Raw | ConvertFrom-Json).version
+          if ($manifest -ne $tag) {
+            throw "manifest.json version ($manifest) does not match the release tag ($tag)."
+          }
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Install Inno Setup
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe")) {
+            choco install innosetup -y --no-progress
+          }
+
+      - name: Build
+        shell: pwsh
+        run: ./client/build.ps1 -Version "${{ github.event.release.tag_name }}"
+
+      - name: Upload to the release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $files = Get-ChildItem client/artifacts -File | Where-Object { $_.Name -like 'PDC-HomeConnect-Setup-*.exe' -or $_.Name -eq 'SHA256SUMS.txt' }
+          gh release upload "${{ github.event.release.tag_name }}" $files.FullName --clobber
